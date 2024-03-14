@@ -18,36 +18,41 @@ const writeLog = (identifier, initial, calcNumber, result) => {
     console.log(logEntries);
 }
 
-const add = () => {
+const performCalculation = (calcType) => {
     const inputNum = parseInt(userInput.value);
     const initialResult = currentResult;
-    currentResult += inputNum;
-    output('+', initialResult, inputNum);
-    writeLog('add', initialResult, inputNum, currentResult);
+    let mathOperator;
+    if (calcType === 'add') { 
+        currentResult += inputNum;
+        mathOperator = '+';
+    } else if (calcType === 'subtract') {
+        currentResult -= inputNum;
+        mathOperator = '-';
+    } else if (calcType ==='multiply') {
+        currentResult *= inputNum;
+        mathOperator = '*';
+    } else {
+        currentResult /= inputNum;
+        mathOperator = '/';
+    }
+    output(mathOperator, initialResult, inputNum);
+    writeLog(calcType, initialResult, inputNum, currentResult);
+};
+
+const add = () => {
+    performCalculation('add');
 }
 
 const subtract = () => {
-    const inputNum = parseInt(userInput.value);
-    const initialNum = currentResult;
-    currentResult -= inputNum;
-    output('-', initialNum, inputNum);
-    writeLog('subtract', initialNum, inputNum, currentResult);
+    performCalculation('subtract');
 }
 
 const multiply = () => {
-    const inputNum = parseInt(userInput.value);
-    const initialNum = currentResult;
-    currentResult *= inputNum;
-    output('*', initialNum, inputNum);
-    writeLog('multiply', initialNum, inputNum, currentResult);
+    performCalculation('multiply');
 }
 
 const divide = () => {
-    const inputNum = parseInt(userInput.value);
-    const initialNum = currentResult;
-    currentResult /= inputNum;
-    output('/', initialNum, inputNum);
-    writeLog('divide', initialNum, inputNum, currentResult);
+    performCalculation('divide');
 }
 
 // currentResult = add(2,2);
